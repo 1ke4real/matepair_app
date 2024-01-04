@@ -1,15 +1,19 @@
-import {SafeAreaView, Text} from "react-native";
-import {defaultStyle} from "../constants/style/styled";
-import {Button} from "react-native-paper";
+import { Image, SafeAreaView, Text } from "react-native";
+import { defaultStyle } from "../constants/style/styled";
+import { Button } from "react-native-paper";
+import logo from "../../assets/images/Gamepad.png";
 
-export const Home = ({navigation}) => {
+export const Home = ({ navigation }) => {
+    const logo = require('../../assets/images/Gamepad.png');
+    const logoText = require('../../assets/images/text.png');
     return (
         <SafeAreaView style={defaultStyle.container}>
-            <Text style={defaultStyle.text}>Home</Text>
-            <Button mode="contained" onPress={() => navigation.navigate('Tabs')}>
-                Go to Message
+            {/*<Image source={logoText} style={defaultStyle.logo} />*/}
+            <Image source={logo} style={defaultStyle.logo} />
+            <Text style={defaultStyle.title}>MatePair</Text>
+            <Button mode="contained" onPress={() => navigation.navigate('Tabs')} style={defaultStyle.homeButton}>
+                <Text style={defaultStyle.homeButtonText}>Bienvenue</Text>
             </Button>
         </SafeAreaView>
-
-    )
-}
+    );
+};
