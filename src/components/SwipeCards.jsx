@@ -111,7 +111,6 @@ const SwipeCards = () => {
         <View style={styles.container}>
             <SwipeCard key={currentIndex} item={data[currentIndex]} onSwipeLeft={onSwipeLeft}
                        onSwipeRight={onSwipeRight}/>
-
             {liked &&
                 <Ionicons name="heart" size={80} color="#30A46C" style={styles.iconLike}/>
             }
@@ -123,7 +122,8 @@ const SwipeCards = () => {
                     <Ionicons name="close" size={40} style={styles.buttonTextNo}/>
                 </TouchableOpacity>
                 <TouchableOpacity onPress={handleLike} style={styles.likeButton}>
-                    <Ionicons name="checkmark" size={40} style={styles.buttonTextYes}/>
+                    <Ionicons name="game-controller" size={40} style={styles.buttonTextYes}/>
+                    {/*<Ionicons name="checkmark" size={40} style={styles.buttonTextYes}/>*/}
                 </TouchableOpacity>
             </View>
         </View>
