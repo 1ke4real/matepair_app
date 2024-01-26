@@ -14,10 +14,11 @@ const BadgeYes = styled(View)(() => ({
     right: 50,
     borderRadius: 5,
     borderWidth: 1,
-    borderColor: '#20573E',
+    borderColor: '#54346B',
+    backgroundColor: '#121B17',
 }));
 const BadgeText = styled(Text)(() => ({
-    color: '#2F7C57',
+    color: '#8457AA',
     fontSize: 30,
     fontWeight: 'bold',
     padding: 10,
@@ -29,10 +30,11 @@ const BadgeNo = styled(View)(() => ({
     left: 50,
     borderRadius: 5,
     borderWidth: 1,
-    borderColor: '#7C2F2F',
+    borderColor: '#72232D',
+    backgroundColor: '#191111'
 }));
 const BadgeTextNo = styled(Text)(() => ({
-    color: '#7C2F2F',
+    color: '#72232D',
     fontSize: 30,
     fontWeight: 'bold',
     padding: 10,

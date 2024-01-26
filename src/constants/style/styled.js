@@ -1,7 +1,7 @@
 import {SafeAreaView, StyleSheet, View} from "react-native";
 import styled from 'styled-components/native';
 import {Button, Text} from "react-native-paper";
-import { TextInput } from 'react-native-paper';
+import {TextInput} from 'react-native-paper';
 
 
 const defaultStyle = StyleSheet.create({
@@ -14,9 +14,7 @@ const defaultStyle = StyleSheet.create({
         resizeMode: 'contain',
 
     },
-    homeButtonText: {
-
-    }
+    homeButtonText: {}
 });
 
 const DefaultView = styled(SafeAreaView)(() => ({
@@ -56,6 +54,16 @@ const Input = styled(TextInput)(() => ({
     paddingLeft: 20,
     text: '#EEEEEE',
 }));
+const Search = styled(TextInput)(() => ({
+    backgroundColor: '#222222',
+    borderWidth: 1,
+    borderColor: '#606060',
+    marginTop: 10,
+    marginLeft: 10,
+    marginRight: 10,
+    marginBottom: 10,
+    text: '#EEEEEE',
+}));
 const InputText = styled(Text)(() => ({
     color: '#EEEEEE',
     fontWeight: 'bold',
@@ -66,7 +74,6 @@ const InputText = styled(Text)(() => ({
 }));
 
 
-
-
-export {defaultStyle, DefaultView, ActionButton, ActionButtonText, Input, InputText, Title
+export {
+    defaultStyle, DefaultView, ActionButton, ActionButtonText, Input, InputText, Title, Search
 };
