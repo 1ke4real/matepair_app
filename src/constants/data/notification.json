@@ -1,0 +1,13 @@
+{
+  "id": 1,
+  "title": "New Notification",
+  "content": "You have a new notification!",
+  "timestamp": "2024-01-26T12:34:56",
+  "user_id": {
+    "id": 1,
+    "email": "user@example.com",
+    "roles": ["ROLE_USER"],
+    "password": "hashed_password",
+    "username": "user123"
+  }
+}

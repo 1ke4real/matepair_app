@@ -5,44 +5,32 @@ import {useState} from "react";
 import {HeaderButton, HeaderContainer, HeaderText} from "../constants/style/auth/styled";
 import { Ionicons } from '@expo/vector-icons';
 
-export  const Login = ({navigation}) => {
-    const userJson = {
-        "id": 1,
-        "email": "user@example.com",
-        "roles": ["ROLE_USER"],
-        "password": "hashed_password",
-        "username": "user123",
-        "details": "Some details about the user",
-        "favorite_games": ["Game1", "Game2"],
-        "play_schedule": ["Monday", "Wednesday"],
-        "send": [],
-        "receive": [],
-        "notifications": [],
-        "first": [],
-        "second": [],
-        "weekDays": [],
-        "timeDays": []
-    }
-    const [login, setLogin] = useState({
-        email: '',
-        password: ''
-    })
-    const auth = async () => {
-        if (login.email === userJson.email && login.password === userJson.password) {
-           console.log('ok')
-        }
-
-        }
+export  const Register = ({navigation}) => {
+const [login, setLogin] = useState({
+    email: '',
+    password: ''
+})
+const auth = async () => {
+    console.log(login)
+}
 
     return (
         <DefaultView style={{padding: 10}}>
-           <HeaderContainer style={{margin:10}}>
-               <HeaderButton>
-                   <Ionicons name="ios-caret-back"  size={20} color="#8457AA" onPress={()=>navigation.goBack()}/>
-               </HeaderButton>
-               <HeaderText>S'inscrire</HeaderText>
-              </HeaderContainer>
+            <HeaderContainer style={{margin:10}}>
+                <HeaderButton>
+                    <Ionicons name="ios-caret-back"  size={20} color="#8457AA" onPress={()=>navigation.goBack()}/>
+                </HeaderButton>
+                <HeaderText>Se connecter</HeaderText>
+            </HeaderContainer>
             <View style={{marginBottom : 10, paddingLeft: 10, paddingRight: 10, flex : 1, justifyContent:'center'}}>
+                <InputText>Username</InputText>
+                <Input
+                    underlineColor="transparent"
+                    theme={{  colors: { text: '#EEEEEE'} }}
+                    textColor={'#EEEEEE'}
+                    activeUnderlineColor={'#EEEEEE'}
+                    onChangeText={text => setLogin({...login, email: text})}
+                />
                 <InputText>Email</InputText>
                 <Input
                     underlineColor="transparent"
@@ -61,10 +49,9 @@ export  const Login = ({navigation}) => {
                 />
 
                 <ActionButton mode="contained" onPress={()=> auth()}>
-                    <ActionButtonText>Se Connecter</ActionButtonText>
+                    <ActionButtonText>S'inscrire</ActionButtonText>
                 </ActionButton>
-                <Text style={{color: '#EEEEEE', marginTop:10, fontWeight: 'bold', marginLeft: 10,
-                    marginRight: 10,}}>Mot de passe oublié ?</Text>
+
             </View>
 
         </DefaultView>

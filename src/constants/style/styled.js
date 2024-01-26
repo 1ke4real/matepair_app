@@ -1,4 +1,4 @@
-import {SafeAreaView, StyleSheet} from "react-native";
+import {SafeAreaView, StyleSheet, View} from "react-native";
 import styled from 'styled-components/native';
 import {Button, Text} from "react-native-paper";
 import { TextInput } from 'react-native-paper';
@@ -31,9 +31,9 @@ const Title = styled(Text)(() => ({
     textAlign: 'center',
 }));
 const ActionButton = styled(Button)(() => ({
-    backgroundColor: '#222222',
+    backgroundColor: '#18111B',
     borderWidth: 1,
-    borderColor: '#606060',
+    borderColor: '#54346B',
     padding: 10,
     paddingLeft: 20,
     paddingRight: 20,
@@ -41,7 +41,7 @@ const ActionButton = styled(Button)(() => ({
     margin: 10,
 }));
 const ActionButtonText = styled(Text)(() => ({
-    color: '#EEEEEE',
+    color: '#8457AA',
     fontSize: 20,
 }));
 
@@ -50,6 +50,9 @@ const Input = styled(TextInput)(() => ({
     borderWidth: 1,
     borderColor: '#606060',
     padding: 5,
+    marginLeft: 10,
+    marginRight: 10,
+    marginBottom: 10,
     paddingLeft: 20,
     text: '#EEEEEE',
 }));
@@ -58,8 +61,11 @@ const InputText = styled(Text)(() => ({
     fontWeight: 'bold',
     fontSize: 15,
     marginBottom: 10,
-
+    marginLeft: 10,
+    marginRight: 10,
 }));
+
+
 
 
 export {defaultStyle, DefaultView, ActionButton, ActionButtonText, Input, InputText, Title

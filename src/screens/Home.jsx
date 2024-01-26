@@ -11,7 +11,13 @@ export const Home = ({ navigation }) => {
             <Image source={logo} style={defaultStyle.logo} />
             <Title>MatePair</Title>
             <ActionButton mode="contained" onPress={() => navigation.navigate('Login')}>
-                <ActionButtonText>Bienvenue</ActionButtonText>
+                <ActionButtonText>Login</ActionButtonText>
+            </ActionButton>
+            <ActionButton mode="contained" onPress={() => navigation.navigate('Register')}>
+                <ActionButtonText>Inscrire</ActionButtonText>
+            </ActionButton>
+            <ActionButton mode="contained" onPress={() => navigation.navigate('Register')}>
+                <ActionButtonText>Match</ActionButtonText>
             </ActionButton>
         </DefaultView>
     );

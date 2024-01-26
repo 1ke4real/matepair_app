@@ -1,0 +1,19 @@
+{
+  "id": 1,
+  "content": "Hello, how are you?",
+  "timestamp": "2024-01-26T12:34:56",
+  "sender": {
+    "id": 1,
+    "email": "sender@example.com",
+    "roles": ["ROLE_USER"],
+    "password": "hashed_password",
+    "username": "sender123"
+  },
+  "receiver": {
+    "id": 2,
+    "email": "receiver@example.com",
+    "roles": ["ROLE_USER"],
+    "password": "hashed_password",
+    "username": "receiver456"
+  }
+}
