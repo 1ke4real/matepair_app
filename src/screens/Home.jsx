@@ -16,7 +16,7 @@ export const Home = ({ navigation }) => {
             <ActionButton mode="contained" onPress={() => navigation.navigate('Register')}>
                 <ActionButtonText>Inscrire</ActionButtonText>
             </ActionButton>
-            <ActionButton mode="contained" onPress={() => navigation.navigate('Register')}>
+            <ActionButton mode="contained" onPress={() => navigation.navigate('Tabs')}>
                 <ActionButtonText>Match</ActionButtonText>
             </ActionButton>
         </DefaultView>
