@@ -40,18 +40,15 @@ const ActionButton = styled(Button)(() => ({
 }));
 const ActionButtonText = styled(Text)(() => ({
     color: '#8457AA',
-    fontSize: 20,
+    fontSize: 15,
 }));
 
 const Input = styled(TextInput)(() => ({
     backgroundColor: '#222222',
-    borderWidth: 1,
     borderColor: '#606060',
-    padding: 5,
+    padding: 1,
     marginLeft: 10,
     marginRight: 10,
-    marginBottom: 10,
-    paddingLeft: 20,
     text: '#EEEEEE',
 }));
 const Search = styled(TextInput)(() => ({
@@ -68,7 +65,7 @@ const InputText = styled(Text)(() => ({
     color: '#EEEEEE',
     fontWeight: 'bold',
     fontSize: 15,
-    marginBottom: 10,
+    marginBottom: 5,
     marginLeft: 10,
     marginRight: 10,
 }));

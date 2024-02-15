@@ -1,28 +1,16 @@
-import {View} from "react-native";
-import {IconButton, Text,} from "react-native-paper";
+import {StatusBar, Touchable, TouchableOpacity, View} from "react-native";
+import {HelperText, IconButton, Text,} from "react-native-paper";
 import {Input, DefaultView, InputText, ActionButton, Title, ActionButtonText} from "../constants/style/styled";
 import {useState} from "react";
 import {HeaderButton, HeaderContainer, HeaderText} from "../constants/style/auth/styled";
 import {Ionicons} from '@expo/vector-icons';
+import {setToken} from "../feature/user/tokenSlice";
 
 export const Login = ({navigation}) => {
-    // const userJson = {
-    //     "id": 1,
-    //     "email": "user@example.com",
-    //     "roles": ["ROLE_USER"],
-    //     "password": "hashed_password",
-    //     "username": "user123",
-    //     "details": "Some details about the user",
-    //     "favorite_games": ["Game1", "Game2"],
-    //     "play_schedule": ["Monday", "Wednesday"],
-    //     "send": [],
-    //     "receive": [],
-    //     "notifications": [],
-    //     "first": [],
-    //     "second": [],
-    //     "weekDays": [],
-    //     "timeDays": []
-    // }
+    const [error, setError] = useState({
+        message: '',
+        status: false
+    })
     const [login, setLogin] = useState({
         email: '',
         password: ''
@@ -38,39 +26,64 @@ export const Login = ({navigation}) => {
                 body: JSON.stringify(login)
             })
             const res = await req.json()
-            console.log(res)
+            if (res.token) {
+                setToken(res.token)
+                navigation.navigate('Tabs')
+            } else {
+                setError({
+                    message: "Email ou mot de passe incorrecte",
+                    status: true
+                })
+            }
+        } else {
+            setError({
+                message: "Veuillez remplir tous les champs",
+                status: true
+            })
         }
-
     }
 
-
     return (
-        <DefaultView style={{padding: 10}}>
+        <DefaultView>
             <HeaderContainer style={{margin: 10}}>
                 <HeaderButton>
                     <Ionicons name="ios-caret-back" size={20} color="#8457AA" onPress={() => navigation.goBack()}/>
                 </HeaderButton>
-                <HeaderText>S'inscrire</HeaderText>
+                <HeaderText>Se connecter</HeaderText>
             </HeaderContainer>
-            <View style={{marginBottom: 10, paddingLeft: 10, paddingRight: 10, flex: 1, justifyContent: 'center'}}>
+            <View style={{flex: 1, justifyContent: 'center'}}>
                 <InputText>Email</InputText>
-                <Input underlineColor="transparent" theme={{colors: {text: '#EEEEEE'}}} textColor={'#EEEEEE'}
-                       activeUnderlineColor={'#EEEEEE'} onChangeText={text => setLogin({...login, email: text})}
-                       autoCapitalize='none'/>
-                <InputText>Password</InputText>
-                <Input underlineColor="transparent" theme={{colors: {text: '#EEEEEE'}}} textColor={'#EEEEEE'}
-                       activeUnderlineColor={'#EEEEEE'} onChangeText={text => setLogin({...login, password: text})}
-                       autoCapitalize='none'/>
-
+                <Input theme={{colors: {text: '#EEEEEE'}}} textColor={'#EEEEEE'} activeUnderlineColor={'#EEEEEE'}
+                       mode={'flat'} onChangeText={text => setLogin({...login, email: text})} autoCapitalize='none'
+                       placeholder="Email"/>
+                <HelperText type={'error'} visible={error.status}>{error.message}</HelperText>
+                <InputText>Mot de passe</InputText>
+                <Input theme={{colors: {text: '#EEEEEE'}}} textColor={'#EEEEEE'} activeUnderlineColor={'#EEEEEE'}
+                       onChangeText={text => setLogin({...login, password: text})} autoCapitalize='none' mode={'flat'}
+                       placeholder={'Mot de passe'}/>
+                <HelperText type={'error'} visible={error.status}>{error.message}</HelperText>
                 <ActionButton mode="contained" onPress={() => auth()}>
-                    <ActionButtonText>Se Connecter</ActionButtonText>
+                    <ActionButtonText>Se connecter</ActionButtonText>
                 </ActionButton>
-                <Text style={{
-                    color: '#EEEEEE', marginTop: 10, fontWeight: 'bold', marginLeft: 10,
-                    marginRight: 10,
-                }}>Mot de passe oublié ?</Text>
+                <TouchableOpacity onPress={() => navigation.navigate('Register')}>
+                    <Text style={{
+                        color: '#EEEEEE', marginTop: 10, fontWeight: 'bold', marginLeft: 10,
+                        marginRight: 10,
+                        textAlign: 'center',
+                        fontSize: 12
+                    }}>
+                        Vous n'avez pas de compte s'inscrire
+                    </Text>
+                </TouchableOpacity>
+                <TouchableOpacity>
+                    <Text style={{
+                        color: '#EEEEEE', marginTop: 10, fontWeight: 'bold', marginLeft: 10,
+                        marginRight: 10,
+                        textAlign: 'center',
+                        fontSize: 12
+                    }}>Mot de passe oublié ?</Text>
+                </TouchableOpacity>
             </View>
-
         </DefaultView>
     )
 }

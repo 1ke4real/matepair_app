@@ -1,6 +1,7 @@
 import styled from "styled-components/native";
 import {View} from "react-native";
 import {Button, Text} from "react-native-paper";
+
 const HeaderContainer = styled(View)(() => ({
     flexDirection: 'row',
     alignItems: 'center',
@@ -17,7 +18,6 @@ const HeaderButton = styled(Button)(() => ({
     backgroundColor: '#18111B',
     borderWidth: 1,
     borderColor: '#54346B',
-    padding: 10,
     color: '#8457AA',
 }));
 const HeaderText = styled(Text)(() => ({

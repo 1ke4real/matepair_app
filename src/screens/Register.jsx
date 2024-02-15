@@ -1,56 +1,60 @@
-import {View} from "react-native";
-import {IconButton, Text,} from "react-native-paper";
+import {TouchableOpacity, View} from "react-native";
+import {HelperText, IconButton, Text,} from "react-native-paper";
 import {Input, DefaultView, InputText, ActionButton, Title, ActionButtonText} from "../constants/style/styled";
 import {useState} from "react";
 import {HeaderButton, HeaderContainer, HeaderText} from "../constants/style/auth/styled";
-import { Ionicons } from '@expo/vector-icons';
+import {Ionicons} from '@expo/vector-icons';
 
-export  const Register = ({navigation}) => {
-const [login, setLogin] = useState({
-    email: '',
-    password: ''
-})
-const auth = async () => {
-    console.log(login)
-}
+export const Register = ({navigation}) => {
+    const [error, setError] = useState({
+        message: '',
+        status: false
+    })
+    const [login, setLogin] = useState({
+        email: '',
+        password: ''
+    })
+    const auth = async () => {
+        console.log(login)
+    }
 
     return (
-        <DefaultView style={{padding: 10}}>
-            <HeaderContainer style={{margin:10}}>
+        <DefaultView>
+            <HeaderContainer style={{margin: 10}}>
                 <HeaderButton>
-                    <Ionicons name="ios-caret-back"  size={20} color="#8457AA" onPress={()=>navigation.goBack()}/>
+                    <Ionicons name="ios-caret-back" size={20} color="#8457AA" onPress={() => navigation.goBack()}/>
                 </HeaderButton>
-                <HeaderText>Se connecter</HeaderText>
+                <HeaderText>S'inscrire</HeaderText>
             </HeaderContainer>
-            <View style={{marginBottom : 10, paddingLeft: 10, paddingRight: 10, flex : 1, justifyContent:'center'}}>
-                <InputText>Username</InputText>
-                <Input
-                    underlineColor="transparent"
-                    theme={{  colors: { text: '#EEEEEE'} }}
-                    textColor={'#EEEEEE'}
-                    activeUnderlineColor={'#EEEEEE'}
-                    onChangeText={text => setLogin({...login, email: text})}
-                />
+            <View style={{flex: 1, justifyContent: 'center'}}>
+                <InputText>Nom d'utilisateur</InputText>
+                <Input theme={{colors: {text: '#EEEEEE'}}} textColor={'#EEEEEE'} activeUnderlineColor={'#EEEEEE'}
+                       mode={'flat'} onChangeText={text => setLogin({...login, email: text})} autoCapitalize='none'
+                       placeholder="Nom d'utilisateur" style={{marginBottom: 20}}/>
                 <InputText>Email</InputText>
-                <Input
-                    underlineColor="transparent"
-                    theme={{  colors: { text: '#EEEEEE'} }}
-                    textColor={'#EEEEEE'}
-                    activeUnderlineColor={'#EEEEEE'}
-                    onChangeText={text => setLogin({...login, email: text})}
-                />
-                <InputText>Password</InputText>
-                <Input
-                    underlineColor="transparent"
-                    theme={{  colors: { text: '#EEEEEE'} }}
-                    textColor={'#EEEEEE'}
-                    activeUnderlineColor={'#EEEEEE'}
-                    onChangeText={text => setLogin({...login, password: text})}
-                />
+                <Input theme={{colors: {text: '#EEEEEE'}}} textColor={'#EEEEEE'} activeUnderlineColor={'#EEEEEE'}
+                       mode={'flat'} onChangeText={text => setLogin({...login, email: text})} autoCapitalize='none'
+                       placeholder="Email"/>
+                <HelperText type={'error'} visible={error.status}>{error.message}</HelperText>
+                <InputText>Mot de passe</InputText>
+                <Input theme={{colors: {text: '#EEEEEE'}}} textColor={'#EEEEEE'} activeUnderlineColor={'#EEEEEE'}
+                       onChangeText={text => setLogin({...login, password: text})} autoCapitalize='none' mode={'flat'}
+                       placeholder={'Mot de passe'}/>
+                <HelperText type={'error'} visible={error.status}>{error.message}</HelperText>
 
-                <ActionButton mode="contained" onPress={()=> auth()}>
+                <ActionButton mode="contained" onPress={() => auth()}>
                     <ActionButtonText>S'inscrire</ActionButtonText>
                 </ActionButton>
+                <TouchableOpacity onPress={() => navigation.navigate('Login')}>
+                    <Text style={{
+                        color: '#EEEEEE', marginTop: 10, fontWeight: 'bold', marginLeft: 10,
+                        marginRight: 10,
+                        textAlign: 'center',
+                        fontSize: 12
+                    }}>
+                        Vous avez déjà un compte ? Se connecter
+                    </Text>
+                </TouchableOpacity>
 
             </View>
 
