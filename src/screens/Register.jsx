@@ -10,13 +10,25 @@ export const Register = ({navigation}) => {
         message: '',
         status: false
     })
-    const [login, setLogin] = useState({
+    const [register, setRegister] = useState({
+        username: '',
         email: '',
         password: ''
     })
-    const auth = async () => {
-        console.log(login)
+    const reg = async () => {
+        const req = await fetch('https://mikeleman.fr/register', {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(register)
+        })
+        const res = await req.json()
+        console.log(req)
+        console.log(res)
     }
+
 
     return (
         <DefaultView>
@@ -29,20 +41,20 @@ export const Register = ({navigation}) => {
             <View style={{flex: 1, justifyContent: 'center'}}>
                 <InputText>Nom d'utilisateur</InputText>
                 <Input theme={{colors: {text: '#EEEEEE'}}} textColor={'#EEEEEE'} activeUnderlineColor={'#EEEEEE'}
-                       mode={'flat'} onChangeText={text => setLogin({...login, email: text})} autoCapitalize='none'
-                       placeholder="Nom d'utilisateur" style={{marginBottom: 20}}/>
+                       mode={'flat'} onChangeText={text => setRegister({...register, email: text})}
+                       autoCapitalize='none' placeholder="Nom d'utilisateur" style={{marginBottom: 20}}/>
                 <InputText>Email</InputText>
                 <Input theme={{colors: {text: '#EEEEEE'}}} textColor={'#EEEEEE'} activeUnderlineColor={'#EEEEEE'}
-                       mode={'flat'} onChangeText={text => setLogin({...login, email: text})} autoCapitalize='none'
-                       placeholder="Email"/>
+                       mode={'flat'} onChangeText={text => setRegister({...register, email: text})}
+                       autoCapitalize='none' placeholder="Email"/>
                 <HelperText type={'error'} visible={error.status}>{error.message}</HelperText>
                 <InputText>Mot de passe</InputText>
                 <Input theme={{colors: {text: '#EEEEEE'}}} textColor={'#EEEEEE'} activeUnderlineColor={'#EEEEEE'}
-                       onChangeText={text => setLogin({...login, password: text})} autoCapitalize='none' mode={'flat'}
-                       placeholder={'Mot de passe'}/>
+                       onChangeText={text => setRegister({...register, password: text})} autoCapitalize='none'
+                       mode={'flat'} placeholder={'Mot de passe'}/>
                 <HelperText type={'error'} visible={error.status}>{error.message}</HelperText>
 
-                <ActionButton mode="contained" onPress={() => auth()}>
+                <ActionButton mode="contained" onPress={() => reg()}>
                     <ActionButtonText>S'inscrire</ActionButtonText>
                 </ActionButton>
                 <TouchableOpacity onPress={() => navigation.navigate('Login')}>
