@@ -34,9 +34,10 @@ export const Login = ({navigation}) => {
                     },
                     dispatch,
                     token);
+                console.log(req)
                 if (req.token) {
                     dispatch(setToken(req.token));
-                    dataUser(req.token);
+
                 } else {
                     setError({
                         message: "Email ou mot de passe incorrecte",
@@ -60,7 +61,7 @@ export const Login = ({navigation}) => {
         if (token !== null) {
             navigation.navigate('Tabs')
         }
-    }, [user])
+    }, [token])
     return (
         <DefaultView>
             <HeaderContainer style={{margin: 10}}>
