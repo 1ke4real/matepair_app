@@ -1,12 +1,16 @@
-import {StatusBar, Touchable, TouchableOpacity, View} from "react-native";
+import {ScrollView, StatusBar, Touchable, TouchableOpacity, View} from "react-native";
 import {HelperText, IconButton, Text,} from "react-native-paper";
 import {Input, DefaultView, InputText, ActionButton, Title, ActionButtonText} from "../constants/style/styled";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {HeaderButton, HeaderContainer, HeaderText} from "../constants/style/auth/styled";
 import {Ionicons} from '@expo/vector-icons';
 import {setToken} from "../feature/user/tokenSlice";
+import {setUserData} from "../feature/user/userDataSlice";
+import {useDispatch, useSelector} from "react-redux";
+import {fetchWithTokenRefresh} from "../helpers/FetchRefreshToken";
 
 export const Login = ({navigation}) => {
+    const dispatch = useDispatch()
     const [error, setError] = useState({
         message: '',
         status: false
@@ -15,34 +19,48 @@ export const Login = ({navigation}) => {
         email: '',
         password: ''
     })
+    const user = useSelector(state => state.userData.value);
+    const token = useSelector(state => state.token.value);
     const auth = async () => {
         if (login.email && login.password) {
-            const req = await fetch('https://mikeleman.fr/auth', {
-                method: 'POST',
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(login)
-            })
-            const res = await req.json()
-            if (res.token) {
-                setToken(res.token)
-                navigation.navigate('Tabs')
-            } else {
+            try {
+                const req = await fetchWithTokenRefresh('https://mikeleman.fr/auth', { // Utilisez fetchWithTokenRefresh au lieu de fetch
+                        method: 'POST',
+                        headers: {
+                            'Accept': 'application/json',
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(login)
+                    },
+                    dispatch,
+                    token);
+                if (req.token) {
+                    dispatch(setToken(req.token));
+                    dataUser(req.token);
+                } else {
+                    setError({
+                        message: "Email ou mot de passe incorrecte",
+                        status: true
+                    });
+                }
+            } catch (error) {
                 setError({
-                    message: "Email ou mot de passe incorrecte",
+                    message: "Une erreur s'est produite lors de l'authentification",
                     status: true
-                })
+                });
             }
         } else {
             setError({
                 message: "Veuillez remplir tous les champs",
                 status: true
-            })
+            });
         }
     }
-
+    useEffect(() => {
+        if (token !== null) {
+            navigation.navigate('Tabs')
+        }
+    }, [user])
     return (
         <DefaultView>
             <HeaderContainer style={{margin: 10}}>

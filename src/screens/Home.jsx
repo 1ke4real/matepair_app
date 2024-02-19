@@ -14,6 +14,7 @@ export const Home = ({navigation}) => {
             <ActionButton mode="contained" onPress={() => navigation.navigate('Login')}>
                 <ActionButtonText>Login</ActionButtonText>
             </ActionButton>
+            
         </DefaultView>
     );
 };

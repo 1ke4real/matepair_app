@@ -1,7 +1,7 @@
 import {TouchableOpacity, View} from "react-native";
 import {HelperText, IconButton, Text,} from "react-native-paper";
 import {Input, DefaultView, InputText, ActionButton, Title, ActionButtonText} from "../constants/style/styled";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {HeaderButton, HeaderContainer, HeaderText} from "../constants/style/auth/styled";
 import {Ionicons} from '@expo/vector-icons';
 
@@ -25,10 +25,15 @@ export const Register = ({navigation}) => {
             body: JSON.stringify(register)
         })
         const res = await req.json()
-        console.log(req)
-        console.log(res)
+        if (req.status === 200) {
+            navigation.navigate('Login')
+        } else {
+            setError({
+                message: "Une erreur est survenue",
+                status: true
+            })
+        }
     }
-
 
     return (
         <DefaultView>
@@ -41,8 +46,9 @@ export const Register = ({navigation}) => {
             <View style={{flex: 1, justifyContent: 'center'}}>
                 <InputText>Nom d'utilisateur</InputText>
                 <Input theme={{colors: {text: '#EEEEEE'}}} textColor={'#EEEEEE'} activeUnderlineColor={'#EEEEEE'}
-                       mode={'flat'} onChangeText={text => setRegister({...register, email: text})}
-                       autoCapitalize='none' placeholder="Nom d'utilisateur" style={{marginBottom: 20}}/>
+                       mode={'flat'} onChangeText={text => setRegister({...register, username: text})}
+                       autoCapitalize='none' placeholder="Nom d'utilisateur"/>
+                <HelperText type={'error'} visible={error.status}>{error.message}</HelperText>
                 <InputText>Email</InputText>
                 <Input theme={{colors: {text: '#EEEEEE'}}} textColor={'#EEEEEE'} activeUnderlineColor={'#EEEEEE'}
                        mode={'flat'} onChangeText={text => setRegister({...register, email: text})}

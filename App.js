@@ -10,6 +10,7 @@ import {StatusBar} from "react-native";
 
 export default function App() {
     const Stack = createNativeStackNavigator();
+
     return (
         <Provider store={store}>
             <NavigationContainer>
